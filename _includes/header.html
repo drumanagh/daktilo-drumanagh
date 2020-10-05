@@ -1,24 +1,44 @@
+{% assign filtered_pages = site.pages | where: "in_navigation", true | sort:
+"title" %}
+
 <header class="header">
-    <div class="navigation">
-        <a href="/" class="logo">{{ site.title }}</a>
+  <div class="navigation">
+    <a href="/" class="logo">{{ site.title }}</a>
 
-        <ul class="menu">
-            <li class="menu__entry"><a href="{{ '/about' | prepend: site.baseurl }}">About</a></li>
-            <li class="menu__entry"><a href="{{ '/' | prepend: site.baseurl }}">Blog</a></li>
-        </ul>
-    </div>
-
-    <ul class="social-links">
-        {% if site.author.github %}
-            <a href="https://github.com/{{ site.author.github }}" class="social-links__entry" target="_blank">
-                <i class="fa fa-github"></i>
-            </a>
-        {% endif %}
-
-        {% if site.author.twitter %}
-            <a href="https://twitter.com/{{ site.author.twitter }}" class="social-links__entry" target="_blank">
-                <i class="fa fa-twitter"></i>
-            </a>
-        {% endif %}
+    <ul class="menu">
+      {% for page in filtered_pages %}
+      <li class="menu__entry">
+        <a href="{{ page.url }}">{{ page.title }}</a>
+      </li>
+      {% endfor %}
     </ul>
+  </div>
+
+  <ul class="social-links">
+    {% if site.author.github %}
+    <a
+      href="https://github.com/{{ site.author.github }}"
+      class="social-links__entry"
+      target="_blank"
+    >
+      <i class="fa fa-github"></i>
+    </a>
+    {% endif %} {% if site.author.tumblr %}
+    <a
+      href="https://{{ site.author.tumblr }}.tumblr.com"
+      class="social-links__entry"
+      target="_blank"
+    >
+      <i class="fa fa-tumblr"></i>
+    </a>
+    {% endif %} {% if site.author.twitter %}
+    <a
+      href="https://twitter.com/{{ site.author.twitter }}"
+      class="social-links__entry"
+      target="_blank"
+    >
+      <i class="fa fa-twitter"></i>
+    </a>
+    {% endif %}
+  </ul>
 </header>
